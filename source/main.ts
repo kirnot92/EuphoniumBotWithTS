@@ -17,9 +17,8 @@ class EuphoniumEngine
         while (true)
         {
             // 다음 정각 시간까지 기다린다
-            console.log(60 - Time.GetMinute() + "분 만큼 기다립니다");
             await WaitFor.Minute(60 - Time.GetMinute());
-        
+
             await this.Tweet();
         }
     }
@@ -35,7 +34,6 @@ class EuphoniumEngine
 
             // 3의 배수 시간에는 이미지를 포함해서 트윗
             var files = hour % 3 == 0 ? scriptData.FilePaths : [];
-            console.log("트윗함: " + scriptData.Text + " "+ files);
             this.client.Tweet(scriptData.Text, files);
         }
     }
