@@ -1,0 +1,21 @@
+{
+  "name": "euphonium-bot",
+  "version": "0.1.0",
+  "description": "Euphonium Bot",
+  "main": "autogen/main.js",
+  "scripts": {
+    "build": "del-cli 'autogen/**/*' && tsc -p tsconfig.json",
+    "clean": "del-cli 'autogen/**/*'",
+    "start": "nodemon --config nodemon.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Beretta <kirnot92@gmail.com>",
+  "contributors": [],
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@types/twitter": "^1.7.0",
+    "del-cli": "^3.0.0",
+    "twitter": "^1.7.1"
+  }
+}
