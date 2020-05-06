@@ -16,10 +16,17 @@ class EuphoniumEngine
     {
         while (true)
         {
-            // 다음 정각 시간까지 기다린다
-            await WaitFor.Minute(60 - Time.GetMinute());
+            try
+            {
+                // 다음 정각 시간까지 기다린다
+                await WaitFor.Minute(60 - Time.GetMinute());
 
-            await this.Tweet();
+                await this.Tweet();
+            }
+            catch (error)
+            {
+                await this.ErrorReport(error);
+            }
         }
     }
 
@@ -36,6 +43,14 @@ class EuphoniumEngine
             var files = hour % 3 == 0 ? scriptData.FilePaths : [];
             this.client.Tweet(scriptData.Text, files);
         }
+    }
+
+    private static async ErrorReport(error: Error)
+    {
+        var errorMsg = "애러가 발생했습니다. " + error.stack;
+        var adminId = Secret.AdminId;
+
+        await this.client.DirectMessage(adminId, errorMsg);
     }
 }
 

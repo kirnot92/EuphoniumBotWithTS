@@ -20,7 +20,7 @@ export default class Client
     public async Tweet(text: string, filePathList: string[])
     {
         var params = {status: text, media_ids: ""};
-        
+
         if (filePathList.length != 0)
         {
             var mediaIds = await this.UploadImages(filePathList);
@@ -43,7 +43,7 @@ export default class Client
 
             mediaIds.push(mediaId);
         }
-        
+
         return mediaIds;
     }
 
@@ -53,5 +53,26 @@ export default class Client
         var response = await this.client.post('media/upload', {media_data: image});
 
         return response.media_id_string;
+    }
+
+    public async DirectMessage(userName: string, text: string)
+    {
+        // https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/new-event
+        // 위의 공식 문서를 참조함 (-- data행)
+        var params = 
+        {
+            event:
+            {
+                type: "message_create",
+                message_create:
+                {
+                    // 이 유저 아이디가 맞는지 모르겠다...
+                    target: { recipient_id: userName },
+                    message_data: { text: text }
+                }
+            }
+        };
+
+        await this.client.post('direct_message/new', params)
     }
 }
