@@ -2,6 +2,7 @@ import Client from "./tweet";
 import ScriptRepository from "./scriptRepository";
 import Time from "./time";
 import WaitFor from "./waitFor";
+import * as Config from "./json/config.json";
 
 class EuphoniumEngine
 {
@@ -48,7 +49,7 @@ class EuphoniumEngine
     private static async ErrorReport(error: Error)
     {
         var errorMsg = "애러가 발생했습니다. " + error.stack;
-        var adminId = Secret.AdminId;
+        var adminId = Config.AdminId;
 
         await this.client.DirectMessage(adminId, errorMsg);
     }
