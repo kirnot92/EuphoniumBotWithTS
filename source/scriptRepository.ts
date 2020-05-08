@@ -4,7 +4,7 @@ import Assert from "./assert";
 import * as path from "path"
 
 const ROOT = path.resolve(__dirname, "..");
-const IMAGES = path.join(ROOT, "Source\\Image");
+const IMAGES = path.join(ROOT, "source", "image");
 
 export class ScriptData
 {
